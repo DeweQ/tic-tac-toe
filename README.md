@@ -1,2 +1,3 @@
-# tic-tac-toe
-Console version of Tic Tac Toe game on ruby
+# Tic Tac Toe
+---
+Part of The Odin Project ruby course. A simple, console-based Tic Tac Toe game.
