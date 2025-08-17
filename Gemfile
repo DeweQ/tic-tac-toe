@@ -5,3 +5,5 @@ source "https://rubygems.org"
 # gem "rails"
 
 gem "rubocop", "~> 1.79"
+
+gem "terminal-table", "~> 4.0"
