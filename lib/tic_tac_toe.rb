@@ -17,15 +17,24 @@ class TicTacToe
   end
 
   def print_field
-    puts field
-  end
-
-  def finished?
-    field.finished?
+    puts field.to_table
   end
 
   def check_winner
-    field.check_winner
+    winner = "None"
+    field.any? { |row| winner = row[0] if row.uniq.size == 1 && row[0] != " " }
+    field.to_ary.transpose.any? { |column| winner = column[0] if column.uniq.size == 1 && column[0] != " " }
+    diagonal = (0...field.size).map { |i| field[i][i] }
+    winner = diagonal[0] if diagonal.uniq.size == 1 && diagonal[0] != " "
+    anti_diagonal = (0...field.size).map { |i| field[i][field.size - 1 - i] }
+    winner = anti_diagonal[0] if anti_diagonal.uniq.size == 1 && anti_diagonal[0] != " "
+    winner
+  end
+
+  def finished?
+    check_winner != "None" || field.all? do |row|
+      row.all? { |cell| cell != " " }
+    end
   end
 
   private
