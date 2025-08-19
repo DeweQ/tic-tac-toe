@@ -29,6 +29,10 @@ class Field
       row[index] = value
     end
 
+    def to_ary
+      @row
+    end
+
     def to_s
       row.to_s
     end
@@ -37,6 +41,8 @@ class Field
 
     attr_accessor :row
   end
+
+  attr_reader :size
 
   def initialize(size = 3)
     @size = size
@@ -59,7 +65,15 @@ class Field
     @field[y_cord][x_cord] = mark if accessible?(x_cord, y_cord)
   end
 
-  def to_s
+  def transpose
+    @field.transpose
+  end
+
+  def to_ary
+    @field
+  end
+
+  def to_table
     table = Terminal::Table.new headings: [0, 1, 2, "x/y"], rows: @field, style: { all_separators: true }
     (0...@size).each { |i| table.rows[i] << i }
     table.align_column(3, :center)
