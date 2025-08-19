@@ -1,14 +1,20 @@
 require_relative "lib/tic_tac_toe"
 
+field_size = begin
+  Integer(ARGV[0])
+rescue ArgumentError
+  3
+end
+
 loop do
   puts "=" * 80
   puts "NEW GAME"
-  game = TicTacToe.new
+  game = TicTacToe.new(field_size)
   until game.finished?
     puts game.current_player == "X" ? "It's Crosses turn: " : "It's Noughts turn"
     game.print_field
     puts "Enter coordinates separated by space (ex. '0 0')"
-    coords = gets.split.map do |s|
+    coords = $stdin.gets.chomp.split.map do |s|
       Integer(s)
     rescue ArgumentError
       nil
