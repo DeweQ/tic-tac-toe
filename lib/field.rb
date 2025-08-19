@@ -74,9 +74,9 @@ class Field
   end
 
   def to_table
-    table = Terminal::Table.new headings: [0, 1, 2, "x/y"], rows: @field, style: { all_separators: true }
+    table = Terminal::Table.new headings: (0...size).to_a << "x/y", rows: @field, style: { all_separators: true }
     (0...@size).each { |i| table.rows[i] << i }
-    table.align_column(3, :center)
+    table.align_column(size, :center)
     table.to_s
   end
 
