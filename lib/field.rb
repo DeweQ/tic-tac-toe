@@ -58,7 +58,7 @@ class Field
   end
 
   def accessible?(x_cord, y_cord)
-    @field.dig(y_cord, x_cord) == " "
+    ![x_cord, y_cord].include?(nil) && @field.dig(y_cord, x_cord) == " "
   end
 
   def add_mark(mark, x_cord, y_cord)
