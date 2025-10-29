@@ -112,5 +112,38 @@ describe TicTacToe do
   end
 
   describe "#finished?" do
+    subject(:finished_game) { described_class.new }
+    context "when there is no winner and field has empty spots" do
+      it "returns false" do
+        expect(finished_game.finished?).to be false
+      end
+    end
+
+    context "when field has no empty" do
+      before do
+        field = finished_game.instance_variable_get(:@field)
+        field.add_mark("O", 0, 0)
+        field.add_mark("X", 0, 1)
+        field.add_mark("O", 0, 2)
+        field.add_mark("X", 1, 0)
+        field.add_mark("O", 1, 1)
+        field.add_mark("X", 1, 2)
+        field.add_mark("X", 2, 0)
+        field.add_mark("O", 2, 1)
+        field.add_mark("X", 2, 2)
+      end
+      it "returns true" do
+        expect(finished_game.finished?).to be true
+      end
+    end
+
+    context "when there is a winner" do
+      before do
+        allow(finished_game).to receive(:check_winner).and_return("X")
+      end
+      it "returns true" do
+        expect(finished_game.finished?).to be true
+      end
+    end
   end
 end
